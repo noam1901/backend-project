@@ -10,12 +10,12 @@ export class UsersService {
     async getUsers():Promise<Users[]>{
         return await this.usersRepositoty.find()
     }
-    async checkUser(body){
-        
+    async checkUser(body){   
         const response = await this.usersRepositoty.find({
             select: ['password','userid'],
             where: [{email: body.email}]
         })
+        
         if(response.length == 0){
             return false
         }
@@ -25,5 +25,20 @@ export class UsersService {
             return response[0].userid
         }
         return false
+    }
+
+    async addUser(body):Promise<any>{
+        const emailValid = await this.usersRepositoty.find({
+            where: [{'email':body.email}]
+        });
+        if(emailValid.length > 0){
+            return false
+        }else{
+            body.password = await bcrypt.hash(body.password,10)
+            const newUser = await this.usersRepositoty.create(body)
+            return this.usersRepositoty.save(newUser)
+        }
+        
+        
     }
 }
