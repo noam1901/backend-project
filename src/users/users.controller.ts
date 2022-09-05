@@ -17,6 +17,18 @@ export class UsersController {
         }
         
     }
+    @Post('/register')
+    async register(@Body() body,@Session() session, @Res() res, @Req() req){
+        const added =await this.service.addUser(body)
+        if(!added){
+            res.send(added)
+        }else{
+            session.userid = added.userid
+            res.cookie('id',added.userid )
+            res.send(added)
+        }
+        
+    }   
     @Get()
     get(){
         return this.service.getUsers()
