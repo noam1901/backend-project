@@ -17,4 +17,21 @@ export class ProductsService {
             where: [{'productid':_id}]
         })
     }
+    async getProductsOnePhoto(){
+        return await this.productsRepository.query(`select products.productid, productname, unitprice, UnitInStock, Description, discount, avg(rating) as rating, imgurl
+        from products join ratings 
+        on products.productid = ratings.productid
+        join imgs
+        on imgs.productid = products.ProductID
+        group by products.productid`)
+    }
+    async getTopProducts(){
+        return await this.productsRepository.query(`select products.productid, productname, unitprice, UnitInStock, Description, discount, avg(rating) as rating, imgurl
+        from products join ratings 
+        on products.productid = ratings.productid
+        join imgs
+        on imgs.productid = products.ProductID
+        group by products.productid
+        order by avg(rating) DESC limit 6`)
+    }
 }
