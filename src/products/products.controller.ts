@@ -6,6 +6,11 @@ export class ProductsController {
     constructor(private service: ProductsService){}
     @Get()
    get(){
-        return this.service.getProducts()
+        return this.service.getProductsOnePhoto()
+    }
+    
+    @Get('/top')
+    getTop(){
+        return this.service.getTopProducts()
     }
 }
