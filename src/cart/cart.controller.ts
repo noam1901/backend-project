@@ -14,4 +14,10 @@ export class CartController {
     return this.cartService.addOrUpdate(body);
   }
 
+  @Get(':id')
+  getCart(@Param('id') id){
+    
+    return this.cartService.getCartById(+id)
+  }
+
 }

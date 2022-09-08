@@ -13,6 +13,8 @@ import { ImgsModule } from './imgs/imgs.module';
 import { Imgs } from './imgs/imgs.entity';
 import { CartModule } from './cart/cart.module';
 import { Cart } from './cart/entities/cart.entity';
+import { CartdetailsModule } from './cartdetails/cartdetails.module';
+import { Cartdetails } from './cartdetails/entities/cartdetail.entity';
 
 
 @Module({
@@ -22,9 +24,9 @@ import { Cart } from './cart/entities/cart.entity';
   "username": "root",
   "password": "erez1234",
   "database": "project",
-  "entities": [Products,Users,Orders,Imgs,Cart],
+  "entities": [Products,Users,Orders,Imgs,Cart, Cartdetails],
   "synchronize": true
-}), UsersModule, OrdersModule, ImgsModule, CartModule ],
+}), UsersModule, OrdersModule, ImgsModule, CartModule, CartdetailsModule ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -25,6 +25,16 @@ export class ProductsService {
         on imgs.productid = products.ProductID
         group by products.productid`)
     }
+    async getProductOnePhoto(prodid){
+        
+        return await this.productsRepository.query(`select products.productid, productname, unitprice, UnitInStock, Description, discount, avg(rating) as rating, imgurl
+        from products join ratings 
+        on products.productid = ratings.productid
+        join imgs
+        on imgs.productid = products.ProductID
+        where products.productid = ${prodid}
+        group by products.productid`)
+    }
     async getTopProducts(){
         return await this.productsRepository.query(`select products.productid, productname, unitprice, UnitInStock, Description, discount, avg(rating) as rating, imgurl
         from products join ratings 
