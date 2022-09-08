@@ -6,6 +6,13 @@ import { UpdateCartdetailDto } from './dto/update-cartdetail.dto';
 @Controller('cartdetails')
 export class CartdetailsController {
   constructor(private readonly cartdetailsService: CartdetailsService) {}
-
+  @Delete()
+  removeItem(@Body() body){
+    return this.cartdetailsService.removeItemFromCart(body)
+  }
+  @Delete('/all')
+  clearAllCart(@Body() body){
+    return this.cartdetailsService.clearCart(body)
+  }
 }
   
