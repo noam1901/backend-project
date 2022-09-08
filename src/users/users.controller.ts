@@ -32,5 +32,5 @@ export class UsersController {
     @Get()
     get(){
         return this.service.getUsers()
-    }
+    } 
 }

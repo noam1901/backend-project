@@ -11,16 +11,16 @@ export class Orders {
     @Column('datetime')
     orderDate: Date
 
-    @Column('varchar',{length:100})
+    @Column('varchar',{length:100,default:""})
     ShipAddress: string
 
-    @Column('varchar', {length: 45})
+    @Column('varchar', {length: 45,default:""})
     shipCountry: string
 
-    @Column('varchar',{length:45})
+    @Column('varchar',{length:45,default:""})
     shipCity: string
 
-    @Column('varchar', {length:45, nullable:true})
+    @Column('varchar', {length:45, nullable:true,default:""})
     shipPostalCode: string|null
 
 }
