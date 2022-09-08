@@ -32,7 +32,7 @@ export class UsersService {
             where: [{'email':body.email}]
         });
         if(emailValid.length > 0){
-            return false
+            return {message:"email was taken"}
         }else{
             body.password = await bcrypt.hash(body.password,10)
             const newUser = await this.usersRepositoty.create(body)
