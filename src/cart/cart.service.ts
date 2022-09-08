@@ -40,6 +40,7 @@ export class CartService {
     for(let item of items){
       const newItem = await this.productsService.getProductOnePhoto(item.productid)
       newItem[0].amount = item.amount
+      newItem[0].cartid = item.cartid
       fullItems.push(newItem[0])
     }
     return fullItems
