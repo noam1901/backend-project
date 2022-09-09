@@ -15,6 +15,8 @@ import { CartModule } from './cart/cart.module';
 import { Cart } from './cart/entities/cart.entity';
 import { CartdetailsModule } from './cartdetails/cartdetails.module';
 import { Cartdetails } from './cartdetails/entities/cartdetail.entity';
+import { RatingsModule } from './ratings/ratings.module';
+import { Ratings } from './ratings/entities/rating.entity';
 
 
 @Module({
@@ -24,9 +26,9 @@ import { Cartdetails } from './cartdetails/entities/cartdetail.entity';
   "username": "root",
   "password": "erez1234",
   "database": "project",
-  "entities": [Products,Users,Orders,Imgs,Cart, Cartdetails],
+  "entities": [Products,Users,Orders,Imgs,Cart, Cartdetails, Ratings],
   "synchronize": true
-}), UsersModule, OrdersModule, ImgsModule, CartModule, CartdetailsModule ],
+}), UsersModule, OrdersModule, ImgsModule, CartModule, CartdetailsModule, RatingsModule ],
   controllers: [AppController],
   providers: [AppService],
 })
