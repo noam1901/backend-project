@@ -38,7 +38,12 @@ export class UsersService {
             const newUser = await this.usersRepositoty.create(body)
             return this.usersRepositoty.save(newUser)
         }
-        
-        
+    }
+    async getUserFullName(id){
+        const user = await this.usersRepositoty.find({
+            select: ['firstName','lastName'],
+            where: [{'userid':id}]
+        })
+        return user
     }
 }
