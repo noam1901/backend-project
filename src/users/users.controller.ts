@@ -20,7 +20,9 @@ export class UsersController {
     @Post('/register')
     async register(@Body() body,@Session() session, @Res() res, @Req() req){
         const added =await this.service.addUser(body)
-        if(!added){
+        console.log(added);
+        
+        if(!added || added.message){
             res.send(added)
         }else{
             session.userid = added.userid
