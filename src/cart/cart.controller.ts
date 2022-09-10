@@ -9,7 +9,6 @@ export class CartController {
 
   @Post()
   addOrUpdate(@Body() body) {
-    console.log(body);
     
     return this.cartService.addOrUpdate(body);
   }

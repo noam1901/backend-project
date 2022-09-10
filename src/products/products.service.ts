@@ -50,4 +50,18 @@ export class ProductsService {
         group by products.productid
         order by avg(rating) DESC limit 6`)
     }
+    async updateAmount(prodid, amount){
+        const prodToUpdate = await this.productsRepository.find({
+            where:[{'productid': prodid}]
+        })
+        prodToUpdate[0].unitInStock = prodToUpdate[0].unitInStock - amount
+        return await this.productsRepository.save(prodToUpdate[0])
+    }
+
+    async getProductName(prodid){
+        return await this.productsRepository.find({
+            select: ['productName'],
+            where: [{'productid':prodid}]
+        })
+    }
 }
