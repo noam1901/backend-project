@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, Req, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, Req, Session, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -30,9 +30,19 @@ export class UsersController {
             res.send(added)
         }
         
-    }   
+    }  
+    @Get(':id')
+    getById(@Param('id') id){
+        return this.service.getUserDetails(id)
+    }  
+
+    @Post('updatename/:id')
+    updateName(@Body() body,@Param('id') id){
+        return this.service.updateName(body, id)
+    }
     @Get()
     get(){
         return this.service.getUsers()
     } 
+    
 }

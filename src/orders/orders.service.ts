@@ -5,12 +5,14 @@ import { Orders } from './orders.entity';
 import { CartService } from '../cart/cart.service';
 import { CartdetailsService } from '../cartdetails/cartdetails.service';
 import { OrdersdetailsService } from '../ordersdetails/ordersdetails.service';
+import { ProductsService } from '../products/products.service';
 @Injectable()
 export class OrdersService {
     constructor(@InjectRepository(Orders) private ordersRepository:Repository<Orders>, 
     private cartService: CartService,
     private cartDetailsService: CartdetailsService,
-    private ordersDetailsService: OrdersdetailsService){}
+    private ordersDetailsService: OrdersdetailsService,
+    private productsService: ProductsService){}
     async getOrders(){
         return await this.ordersRepository.find()
     }
@@ -27,8 +29,21 @@ export class OrdersService {
             unitprice: item.unitprice,
             amount: item.amount}
             await this.ordersDetailsService.create(itemToCreate)
+            await this.productsService.updateAmount(item.productid, item.amount)
         }
         const removeItemsFromCart = await this.cartDetailsService.deleteCartByCartId(body.cartid)
         return true      
+    }
+    async getOrdersByUser(id){
+        const orders = await this.ordersRepository.find({
+            where: [{'userId': id}]
+        })
+        const fullDetails = []
+        for(let order of orders){
+            const products = await this.ordersDetailsService.getDetailsByOrderId(order.orderId) 
+            fullDetails.push({...order,items: products})
+        }
+        return fullDetails
+        
     }
 }

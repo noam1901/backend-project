@@ -1,9 +1,13 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 
 @Controller('orders')
 export class OrdersController {
     constructor(private service:OrdersService){}
+    @Get(':id')
+    getOrdersByUserId(@Param('id') id){
+        return this.service.getOrdersByUser(id)
+    }
 
     @Get()
     get(){

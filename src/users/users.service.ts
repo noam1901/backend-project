@@ -46,4 +46,20 @@ export class UsersService {
         })
         return user
     }
+    async getUserDetails(id){
+        const details = await this.usersRepositoty.find({
+            select: ['firstName','lastName', 'email', 'phone'],
+            where: [{'userid': id}]
+        })
+        return details
+    }
+    async updateName(body, userid){
+        const user = await this.usersRepositoty.find({
+            where: [{'userid':userid}]
+        })
+        user[0].firstName = body.firstName === ''?user[0].firstName: body.firstName
+        user[0].lastName = body.lastName === ''? user[0].lastName: body.lastName
+        
+        return await this.usersRepositoty.save(user[0])
+    }
 }
