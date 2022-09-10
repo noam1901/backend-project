@@ -12,6 +12,10 @@ export class CartdetailsService {
     })
     return cart
   }
+  async deleteCartByCartId(cartId){
+    const cart = await this.cartDetailsRepo.delete({'cartid': cartId})
+    return cart
+  }
   async removeItemFromCart(body){
     return await this.cartDetailsRepo.createQueryBuilder().delete().from(Cartdetails).where(`cartid = :cartid and productid = :productid`,{cartid: body.cartid, productid: body.productid}).execute()
   }

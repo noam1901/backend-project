@@ -9,6 +9,7 @@ import { ProductsModule } from '../products/products.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Cart]),CartdetailsModule,ProductsModule],
   controllers: [CartController],
-  providers: [CartService]
+  providers: [CartService],
+  exports: [CartService]
 })
 export class CartModule {}
