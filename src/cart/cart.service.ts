@@ -31,11 +31,18 @@ export class CartService {
   }
 
   async getCartById(userid) {
-    
     const cart = await this.cartRipo.find({
       where:[{'userid':userid}]
     })
-    const items = await this.cartdetailsService.getCartByCartId(cart[0].cartid)
+    let cartID
+    if(cart.length === 0){
+      const makeCart = await this.cartRipo.create({"userid":userid})
+      const newCart = await this.cartRipo.save(makeCart) 
+      cartID = newCart.cartid
+    }else {
+      cartID = cart[0].cartid
+    }
+    const items = await this.cartdetailsService.getCartByCartId(cartID)
     const fullItems = []
     for(let item of items){
       const newItem = await this.productsService.getProductOnePhoto(item.productid)
@@ -44,5 +51,12 @@ export class CartService {
       fullItems.push(newItem[0])
     }
     return fullItems
+  }
+
+  async removeByCartId(cartid){
+    return await this.cartRipo.delete({'cartid':cartid})
+  }
+  async getByCartId(cartid){
+    return await this.cartRipo.find({where:[{'cartid':cartid}]})
   }
 }
