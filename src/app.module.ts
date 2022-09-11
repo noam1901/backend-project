@@ -19,6 +19,8 @@ import { RatingsModule } from './ratings/ratings.module';
 import { Ratings } from './ratings/entities/rating.entity';
 import { OrdersdetailsModule } from './ordersdetails/ordersdetails.module';
 import { Ordersdetails } from './ordersdetails/entities/ordersdetail.entity';
+import { WishlistModule } from './wishlist/wishlist.module';
+import { Wishlist } from './wishlist/entities/wishlist.entity';
 
 
 @Module({
@@ -28,9 +30,9 @@ import { Ordersdetails } from './ordersdetails/entities/ordersdetail.entity';
   "username": "root",
   "password": "erez1234",
   "database": "project",
-  "entities": [Products,Users,Orders,Imgs,Cart, Cartdetails, Ratings, Ordersdetails],
+  "entities": [Products,Users,Orders,Imgs,Cart, Cartdetails, Ratings, Ordersdetails, Wishlist],
   "synchronize": true
-}), UsersModule, OrdersModule, ImgsModule, CartModule, CartdetailsModule, RatingsModule, OrdersdetailsModule ],
+}), UsersModule, OrdersModule, ImgsModule, CartModule, CartdetailsModule, RatingsModule, OrdersdetailsModule, WishlistModule ],
   controllers: [AppController],
   providers: [AppService],
 })
