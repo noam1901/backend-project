@@ -14,11 +14,9 @@ export class RatingsService {
     const rating = await this.ratingsRepo.find({
       where: [{'productid':prodid}]
     })
-    console.log(rating);
     const ratingWithUsers = []
     for(let rev of rating){
       const name = await this.userService.getUserFullName(rev.userID)
-      console.log(name);
       ratingWithUsers.push({...rev,fullname:name[0].firstName+' '+name[0].lastName})
     }
     return ratingWithUsers

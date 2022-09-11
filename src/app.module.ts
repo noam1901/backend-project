@@ -19,9 +19,8 @@ import { RatingsModule } from './ratings/ratings.module';
 import { Ratings } from './ratings/entities/rating.entity';
 import { OrdersdetailsModule } from './ordersdetails/ordersdetails.module';
 import { Ordersdetails } from './ordersdetails/entities/ordersdetail.entity';
-import { WishlistModule } from './wishlist/wishlist.module';
 import { Wishlist } from './wishlist/entities/wishlist.entity';
-
+import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
   imports: [ProductsModule,TypeOrmModule.forRoot({"type": "mysql",
