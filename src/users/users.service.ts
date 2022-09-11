@@ -62,4 +62,13 @@ export class UsersService {
         
         return await this.usersRepositoty.save(user[0])
     }
+
+    async updatePass(body, userid){
+        const password = await bcrypt.hash(body.password,10)
+        const user = await this.usersRepositoty.find({
+            where: [{'userid': userid}]
+        })
+        user[0].password = password
+        return await this.usersRepositoty.save(user)
+    }
 }

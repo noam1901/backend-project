@@ -20,7 +20,6 @@ export class UsersController {
     @Post('/register')
     async register(@Body() body,@Session() session, @Res() res, @Req() req){
         const added =await this.service.addUser(body)
-        console.log(added);
         
         if(!added || added.message){
             res.send(added)
@@ -40,6 +39,12 @@ export class UsersController {
     updateName(@Body() body,@Param('id') id){
         return this.service.updateName(body, id)
     }
+
+    @Post('updatepassword/:id')
+    updatePassword(@Body() body,@Param('id') id){
+        return this.service.updatePass(body, id)
+    }
+
     @Get()
     get(){
         return this.service.getUsers()
